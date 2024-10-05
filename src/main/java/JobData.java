@@ -5,10 +5,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -39,8 +36,11 @@ public class JobData {
 
             if (!values.contains(aValue)) {
                 values.add(aValue);
+
             }
+
         }
+
 
         return values;
     }
@@ -74,8 +74,8 @@ public class JobData {
         for (HashMap<String, String> row : allJobs) {
 
             String aValue = row.get(column);
-
-            if (aValue.contains(value)) {
+         //   System.out.println("aValue"+aValue);
+            if (aValue.toUpperCase().contains(value.toUpperCase())) {
                 jobs.add(row);
             }
         }
@@ -94,10 +94,35 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
-        // TODO - implement this method
-        return null;
-    }
+        ArrayList<HashMap<String, String>> al = new ArrayList<>();
+        String[] column = new String[]{ "core competency","employer", "location", "position type","name"};
+        int i = 0;
+        for (HashMap<String, String> row : allJobs) {
+            {
 
+                for (i = 0; i < column.length; i++) {
+                    String aVal = row.get(column[i]);
+                    if (aVal.toUpperCase().contains(value.toUpperCase())) {
+
+                               if(!al.contains(row))
+                            {
+                                al.add(row);
+                            }
+
+
+                    }
+
+
+                }
+
+            }
+
+
+        }
+        //System.out.println(al.size());
+       // Collections.sort(al);
+        return al;
+    }
     /**
      * Read in data from a CSV file and store it in a list
      */

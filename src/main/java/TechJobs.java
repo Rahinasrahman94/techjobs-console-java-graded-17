@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -59,10 +61,12 @@ public class TechJobs {
 
                 // What is their search term?
                 System.out.println("\nSearch term:");
+
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not implemented yet.");
+
+                    printJobs(JobData.findByValue(searchTerm));
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
@@ -119,7 +123,30 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+        if (someJobs.size() > 0) {
+            for (Map<String, String> entry : someJobs) {
+                String position = entry.get("position type").toString();
+                String name = entry.get("name").toString();
+                String employer = entry.get("employer").toString();
+                String location = entry.get("location").toString();
+                String Skill = entry.get("core competency").toString();
+                //String employer = entry.get("employer").toString();
+                System.out.println();
+                System.out.println("*****");
 
-        System.out.println("printJobs is not implemented yet");
+                System.out.println("position type: " + position);
+                System.out.println("name: " + name);
+                System.out.println("employer: " + employer);
+                System.out.println("location: " + location);
+                System.out.println("core competency: " + Skill);
+
+                System.out.println("*****");
+            }
+
+        }
+        else {
+            System.out.print("No Results");
+        }
     }
+
 }
