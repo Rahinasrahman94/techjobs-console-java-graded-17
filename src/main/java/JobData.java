@@ -93,16 +93,14 @@ public class JobData {
 
         // load data, if not already loaded
         loadData();
-
         ArrayList<HashMap<String, String>> al = new ArrayList<>();
-        String[] column = new String[]{ "core competency","employer", "location", "position type","name"};
         int i = 0;
         for (HashMap<String, String> row : allJobs) {
-            {
+               //  String aVal = row.keySet();
+                 for (String colum:row.keySet()) {
+                   String aVals = row.get(colum);
 
-                for (i = 0; i < column.length; i++) {
-                    String aVal = row.get(column[i]);
-                    if (aVal.toUpperCase().contains(value.toUpperCase())) {
+                    if (aVals.toUpperCase().contains(value.toUpperCase())) {
 
                                if( !al.contains(row) )
                             {
@@ -118,7 +116,7 @@ public class JobData {
             }
 
 
-        }
+
         //System.out.println(al.size());
        // Collections.sort(al);
         return al;
